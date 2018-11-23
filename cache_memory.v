@@ -15,20 +15,20 @@ module cache_memory(
     output valid
     );
 
-    reg[BLOCKS-1:0] cache [WORDS*SIZE+20:0]
+    reg[BLOCKS-1:0] cache [WORDS*SIZE+20:0];
     always @(posedge clk)
         begin
         if(mode == 1)
             begin
                 cache[index][0] = 1;
                 cache[index][20:1] = tagin;
-                cache[index][255:21] = datain;
+                cache[index][532:21] = datain;
             end
         else
             begin
                 valid = cache[index][0];
                 dataout = cache[index][blkOffset*(SIZE+1)-1:blkOffset*SIZE];
-                tagout = cache[index][20:1] 
+                tagout = cache[index][20:1];
             end
         end
 

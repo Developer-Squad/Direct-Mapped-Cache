@@ -1,6 +1,6 @@
-`include "cache_memory"
-`include "main_memory"
-`include "cache_decoder"
+`include "cache_memory.v"
+`include "main_memory.v"
+`include "cache_decoder.v"
 
 module cache_controller(clk,AddressTagBits,tagBits,flag);
     input [19:0] AddressTagBits;
