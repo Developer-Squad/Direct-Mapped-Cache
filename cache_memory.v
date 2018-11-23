@@ -1,6 +1,6 @@
-`define BLOCKS = 256
-`define WORDS = 16
-`define SIZE = 32
+`define BLOCKS 256
+`define WORDS 16
+`define SIZE 32
 
 
 module cache_memory(
@@ -10,25 +10,30 @@ module cache_memory(
     input [3:0] blkOffset,
     input [19:0] tagin,
     input [`SIZE*`WORDS-1:0] datain,
-    output [`SIZE-1:0] dataout,
-    output [19:0] tagout,
-    output valid
+    output reg [`SIZE-1:0] dataout,
+    output reg [19:0] tagout,
+    output reg valid
     );
 
     reg[`BLOCKS-1:0] cache [`WORDS*`SIZE+20:0];
+
+    reg [532:0] out;
+
     always @(posedge clk)
         begin
         if(mode == 1)
             begin
-                cache[index][0] = 1;
-                cache[index][20:1] = tagin;
-                cache[index][532:21] = datain;
+                out[0] <= 1;
+                out[20:1] <= tagin;
+                out[532:21] <= datain;
+                cache[index] <= out;
             end
         else
             begin
-                valid = cache[index][0];
-                dataout = cache[index][blkOffset*(`SIZE+1)-1:blkOffset*`SIZE];
-                tagout = cache[index][20:1];
+                out <= cache[index];
+                valid <= out[0];
+                dataout = out[32*(blkOffset)+:32];
+                tagout <= out[20:1];
             end
         end
 
