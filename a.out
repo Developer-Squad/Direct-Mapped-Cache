@@ -1,0 +1,38 @@
+#! /usr/bin/vvp
+:ivl_version "10.1 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x5557e5aec8b0 .scope module, "cache_tb" "cache_tb" 2 1;
+ .timescale 0 0;
+v0x5557e5aeca50_0 .var "A", 31 0;
+v0x5557e5b0cb30_0 .var/i "fp1", 31 0;
+v0x5557e5b0cc10_0 .var/i "temp", 31 0;
+    .scope S_0x5557e5aec8b0;
+T_0 ;
+    %vpi_func 2 6 "$fopen" 32, "gcc.trace", "r" {0 0 0};
+    %store/vec4 v0x5557e5b0cb30_0, 0, 32;
+T_0.0 ;
+    %vpi_func 2 7 "$feof" 32, v0x5557e5b0cb30_0 {0 0 0};
+    %nor/r;
+    %flag_set/vec4 8;
+    %jmp/0xz T_0.1, 8;
+    %vpi_func 2 8 "$fscanf" 32, v0x5557e5b0cb30_0, "%h\012", v0x5557e5aeca50_0 {0 0 0};
+    %store/vec4 v0x5557e5b0cc10_0, 0, 32;
+    %vpi_call 2 9 "$display", "%h", v0x5557e5aeca50_0 {0 0 0};
+    %delay 10, 0;
+    %jmp T_0.0;
+T_0.1 ;
+    %vpi_call 2 12 "$fclose", v0x5557e5b0cb30_0 {0 0 0};
+    %delay 100, 0;
+    %vpi_call 2 13 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "cache_tb.v";
