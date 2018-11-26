@@ -18,8 +18,11 @@ module main_memory(clk,address,data_out);
         q=31;
         for(i=0;i<16;i=i+1) begin
             data_out[q-:32] = intialAddress;
+            // $display("%b\n",data_out[q-:32]);
             q = q+32;        
             intialAddress = intialAddress+1;
+            
         end
+        // $display("\n");
     end
 endmodule

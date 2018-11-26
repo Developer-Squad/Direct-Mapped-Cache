@@ -17,7 +17,7 @@ module cache_memory(clk,address,read,dataIn,dataOut,hit);
     reg [`BLOCK_SIZE+20:0] buffer;
     reg [7:0] index;
     reg [3:0] blockOffset;
-    reg [`BLOCKS-1:0] cache [`BLOCK_SIZE+20:0];
+    reg [`BLOCK_SIZE+20:0] cache [`BLOCKS-1:0];
 
     always@(posedge clk)
     begin
@@ -38,7 +38,11 @@ module cache_memory(clk,address,read,dataIn,dataOut,hit);
             else begin
                 hit = 0;
             end
+            // hit = 0;
             dataOut = cache[index][32*blockOffset+21+31-:32];
+        end
+        else begin
+            hit = 1;
         end
     end
 
