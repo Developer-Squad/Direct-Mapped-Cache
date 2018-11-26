@@ -1,23 +1,16 @@
-`include "cache_memory.v"
-`include "main_memory.v"
-`include "cache_decoder.v"
-
-module cache_controller(clk,AddressTagBits,tagBits,flag);
-    input [19:0] AddressTagBits;
-    input [19:0] CompareTagBits;
+module cache_controller(clk,hit,read);
     input clk;
-
-    output flag;
-
-    reg flag;
+    input hit;
+    
+    output reg read;
 
     always@(posedge clk)
     begin
-        if(AddressTagBits == CompareTagBits){           
-            flag <= 1;
-        }
-        else{
-            flag <= 0;
-        }
+        if(hit == 1) begin
+            read = 1;
+        end
+        else begin
+            read = 0;
+        end
     end
 endmodule
