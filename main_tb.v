@@ -6,6 +6,10 @@ module main_tb();
     wire hit;
 
     integer count = 0;
+    integer c = 0;
+    integer fp1;
+    integer temp;
+    reg [31:0] A;
 
     main uut(
     .clk(clk),
@@ -14,16 +18,16 @@ module main_tb();
     .dataOut(dataOut)
     );
     initial begin 
-        // $monitor("clk = %b hit = %b dataout = %b",clk,hit,dataOut);
+        fp1 = $fopen("output.txt", "r");
         clk = 0;
         count = 1;
-        // address = 32'h1fffff50; #20;
-        // $display("clk = %b  dataout = %b",clk,dataOut);
-        address = 32'h1fffff17; #10;
-        
-
-        
-        #200; $finish;
+        while(!$feof(fp1)) begin
+            temp = $fscanf(fp1,"%h\n",A);
+            c = c + 1;
+            address = A; #10;
+        end
+        $fclose(fp1);
+        $finish;
     end
 
     always begin
@@ -32,17 +36,4 @@ module main_tb();
             count = count + 1;
         $display("clk = %b hit = %b read = %b address = %h dataout = %h count = %d",clk,hit,uut.read,address,dataOut,count);
     end
-    // integer fp1;
-    // integer temp;
-    // reg[31:0]A;
-    // initial begin
-      // fp1 = $fopen("gcc.trace", "r");
-      // while(!$feof(fp1)) begin
-      //   temp = $fscanf(fp1,"%h\n",A);
-      //   $display("%h",A);
-      //   #10;
-      // end
-      // $fclose(fp1);
-      // #100 $finish;
-    // end
 endmodule
