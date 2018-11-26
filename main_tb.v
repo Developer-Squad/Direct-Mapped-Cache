@@ -6,7 +6,6 @@ module main_tb();
     wire hit;
 
     integer count = 0;
-    integer c = 0;
     integer fp1;
     integer temp;
     reg [31:0] A;
@@ -18,12 +17,11 @@ module main_tb();
     .dataOut(dataOut)
     );
     initial begin 
-        fp1 = $fopen("output.txt", "r");
+        fp1 = $fopen("./instruction_sets/output.txt", "r");
         clk = 0;
         count = 1;
         while(!$feof(fp1)) begin
             temp = $fscanf(fp1,"%h\n",A);
-            c = c + 1;
             address = A; #10;
         end
         $fclose(fp1);
