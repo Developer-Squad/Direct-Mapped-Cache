@@ -20,13 +20,7 @@ module main_tb();
         // address = 32'h1fffff50; #20;
         // $display("clk = %b  dataout = %b",clk,dataOut);
         address = 32'h1fffff17; #10;
-        address = 32'h1f2fff17; #10;
-        address = 32'h1f2fff07; #10;
-        address = 32'h1f2fff27; #10;
-        address = 32'h1f2fff27; #10;
-        address = 32'h1f2fff27; #10;
-        address = 32'h1f2fff27; #10;
-        address = 32'h112fff20; #10;
+        
 
         
         #200; $finish;
