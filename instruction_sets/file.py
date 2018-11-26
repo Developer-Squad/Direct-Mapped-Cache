@@ -1,4 +1,4 @@
-filename = "twolf.trace"
+filename = "gcc.trace"
 with open(filename) as file:
 	a = []
 	for line in file:

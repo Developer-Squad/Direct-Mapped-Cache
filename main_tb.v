@@ -17,7 +17,7 @@ module main_tb();
     .dataOut(dataOut)
     );
     initial begin 
-        fp1 = $fopen("./instruction_sets/output.txt", "r");
+        fp1 = $fopen("instruction_sets/gcc.txt", "r");
         clk = 0;
         count = 1;
         while(!$feof(fp1)) begin
